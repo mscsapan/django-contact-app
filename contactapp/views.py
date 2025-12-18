@@ -8,3 +8,6 @@ def home(request):
 
 def add_contact(request):
     return render(request,'form.html')
+
+def edit_contact(request,id):
+    return render(request,'show.html')
