@@ -37,7 +37,8 @@
               <div class="d-flex align-items-center">
                 <h2 class="mb-0">All Contacts</h2>
                 <div class="ml-auto">
-                  <a href="form.html" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add New</a>
+                  <a href="{% url 'add-contact' %}" class="btn btn-success"><i class="fa fa-plus-circle"></i> Add
+                    New</a>
                 </div>
               </div>
             </div>
@@ -61,10 +62,10 @@
                     <td>alfred@test.com</td>
                     <td>98989898</td>
                     <td width="150">
-                      <a href="show.html" class="btn btn-sm btn-circle btn-outline-info" title="Show"><i
-                          class="fa fa-eye"></i></a>
-                      <a href="form.html" class="btn btn-sm btn-circle btn-outline-secondary" title="Edit"><i
-                          class="fa fa-edit"></i></a>
+                      <a href="{% url 'view-contact' 1 %}" class="btn btn-sm btn-circle btn-outline-info"
+                        title="Show"><i class="fa fa-eye"></i></a>
+                      <a href="{% url 'add-contact' %}" class="btn btn-sm btn-circle btn-outline-secondary"
+                        title="Edit"><i class="fa fa-edit"></i></a>
                       <a href="#" class="btn btn-sm btn-circle btn-outline-danger" title="Delete"
                         onclick="confirm('Are you sure?')"><i class="fa fa-times"></i></a>
                     </td>
