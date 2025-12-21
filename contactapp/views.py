@@ -19,6 +19,13 @@ def home(request):
         'phone':'02921829281',
         'email':'khan.baba@gmail.com'
         },
+         {
+        'id': 3,
+        'first_name':'Ibrahim',
+        'last_name':'BKhan',
+        'phone':'9888726',
+        'email':'ibrahim@gmail.com'
+        },
     ]
     return render(request,'index.html',context={'contents': contents})
 

@@ -65,7 +65,7 @@
                     <td>{{ content.email }}</td>
                     <td>{{ content.phone }}</td>
                     <td width="150">
-                      <a href="{% url 'view-contact' 1 %}" class="btn btn-sm btn-circle btn-outline-info"
+                      <a href="{% url 'view-contact' content.id %}" class="btn btn-sm btn-circle btn-outline-info"
                         title="Show"><i class="fa fa-eye"></i></a>
                       <a href="{% url 'add-contact' %}" class="btn btn-sm btn-circle btn-outline-secondary"
                         title="Edit"><i class="fa fa-edit"></i></a>
