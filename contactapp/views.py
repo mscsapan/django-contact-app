@@ -3,7 +3,24 @@ from django.http import HttpResponse
 
 # Create your views here.
 def home(request):
-    return render(request,'index.html')
+    # contents = ['Mohammad','Ali','Khan','Baba','Ibrahim','Hanzala']
+    contents = [
+        {
+        'id': 1,
+        'first_name':'Mohammad',
+        'last_name':'Ali',
+        'phone':'018829281',
+        'email':'mscsapan@gmail.com'
+        },
+        {
+        'id': 2,
+        'first_name':'Khan',
+        'last_name':'Baba',
+        'phone':'02921829281',
+        'email':'khan.baba@gmail.com'
+        },
+    ]
+    return render(request,'index.html',context={'contents': contents})
 
 
 def add_contact(request):
