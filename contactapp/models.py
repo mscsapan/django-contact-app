@@ -13,3 +13,7 @@ class Contact(models.Model):
     def __str__(self):
         return f'{self.id} - {self.email}'
     
+    class Meta:
+        ordering = ['id'] #Ascending
+        #ordering = ['-id'] #Descending
+    

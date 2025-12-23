@@ -1,37 +1,22 @@
+import json
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse,JsonResponse
+from utils.helper import get_specific_fields,get_all_items_with_fields,get_single_item_with_fields
+from . models import Contact
+
 
 # Create your views here.
 def home(request):
-    # contents = ['Mohammad','Ali','Khan','Baba','Ibrahim','Hanzala']
-    contents = [
-        {
-        'id': 1,
-        'first_name':'Mohammad',
-        'last_name':'Ali',
-        'phone':'018829281',
-        'email':'mscsapan@gmail.com'
-        },
-        {
-        'id': 2,
-        'first_name':'Khan',
-        'last_name':'Baba',
-        'phone':'02921829281',
-        'email':'khan.baba@gmail.com'
-        },
-         {
-        'id': 3,
-        'first_name':'Ibrahim',
-        'last_name':'BKhan',
-        'phone':'9888726',
-        'email':'ibrahim@gmail.com'
-        },
-    ]
-    return render(request,'index.html',context={'contents': contents})
+    data = get_all_items_with_fields(Contact)
+    return JsonResponse(data, safe=False, status=200)
+  
+    # return render(request,'index.html',context={'contents': contents})
 
 
 def add_contact(request):
     return render(request,'add_contact.html')
 
 def edit_contact(request,id):
-    return render(request,'view_contact.html')
+    data = get_single_item_with_fields(model=Contact,id=id)
+    return JsonResponse(data, safe=False, status=200)
+    # return render(request,'view_contact.html')
