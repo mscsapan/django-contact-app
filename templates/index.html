@@ -21,7 +21,7 @@
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand text-uppercase" href="index.html">
+      <a class="navbar-brand text-uppercase" href="{% url 'home' %}">
         <strong>Contact</strong> App
       </a>
     </div>
@@ -56,7 +56,7 @@
                 </thead>
                 <tbody>
 
-                  {% for content in contents %}
+                  {% for content in contacts %}
 
                   <tr>
                     <td>1</td>
@@ -65,7 +65,7 @@
                     <td>{{ content.email }}</td>
                     <td>{{ content.phone }}</td>
                     <td width="150">
-                      <a href="{% url 'view-contact' content.id %}" class="btn btn-sm btn-circle btn-outline-info"
+                      <a href="{% url 'show-contact' content.id %}" class="btn btn-sm btn-circle btn-outline-info"
                         title="Show"><i class="fa fa-eye"></i></a>
                       <a href="{% url 'add-contact' %}" class="btn btn-sm btn-circle btn-outline-secondary"
                         title="Edit"><i class="fa fa-edit"></i></a>
