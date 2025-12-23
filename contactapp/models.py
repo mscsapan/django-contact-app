@@ -8,3 +8,8 @@ class Contact(models.Model):
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=15)
     address = models.CharField(max_length=120)
+    
+    
+    def __str__(self):
+        return f'{self.id} - {self.email}'
+    
