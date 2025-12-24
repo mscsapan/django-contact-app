@@ -80,3 +80,16 @@ def get_all_items_with_fields(model, field_list=None):
         fields = [field.name for field in model._meta.fields]
         result = model.objects.values(*fields)
     return list(result)
+
+
+
+
+#  Get single item by ID
+def debug_item(model):
+    """Get single object by ID"""
+    fields = [field.name for field in model._meta.fields]
+    try:
+        result = model.objects.values(*fields).all()
+        return result
+    except model.DoesNotExist:
+        return None
