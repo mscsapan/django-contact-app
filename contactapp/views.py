@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse,JsonResponse
-from utils.helper import get_specific_fields,get_all_items_with_fields,get_single_item_with_fields
+from utils.helper import get_specific_fields,get_all_items_with_fields,get_single_item_with_fields,get_single_item
 from . models import Contact
 
 
@@ -12,6 +12,21 @@ def home(request):
 
 def add_contact(request):
     return render(request,'add_contact_form.html')
+
+def save_contact(request):
+   try:
+       if request.method == 'post':
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
+            email = request.POST['email']
+            phone = request.POST['phone']
+            address = request.POST['address']
+            
+            contact = Contact(first_name,last_name,email,phone,address)
+            data = get_single_item()
+            # return JsonResponse({s})
+   except Exception as e:
+        pass
 
 def show_contact(request,id):
     contact = get_object_or_404(Contact,pk=id)
