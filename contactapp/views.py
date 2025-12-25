@@ -73,9 +73,28 @@ def show_contact(request,id):
     contact = get_object_or_404(Contact,pk=id)
     return render(request,'view_contact.html',{'contact':contact})
 
-def update_contact(request,id):
+def edit_contact(request,id):
     contact = get_object_or_404(Contact,pk=id)
-    return render(request,'update_contact_form.html',{'contact':contact})
+    return render(request,'edit_contact_form.html',{'contact':contact})
+
+def update_contact(request,id):
+    try:
+        if request.method == 'POST':
+            contact = get_object_or_404(Contact,pk=id)
+            
+            contact.first_name = request.POST.get('first_name')
+            contact.last_name = request.POST.get('last_name')
+            contact.email = request.POST.get('email')
+            contact.phone = request.POST.get('phone')
+            contact.address = request.POST.get('address')
+           
+            # return dump(contact)
+            contact.save()
+            return redirect('home')
+        
+    except Exception as e:
+        return JsonResponse({'Error': str(e)},status=403)
+    
 
 def delete_contact(request,id):
     contact = get_object_or_404(Contact,pk=id)

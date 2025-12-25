@@ -21,7 +21,7 @@
   <!-- navbar -->
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand text-uppercase" href="index.html">
+      <a class="navbar-brand text-uppercase" href="{% url 'home' %}">
         <strong>Contact</strong> App
       </a>
     </div>
@@ -76,7 +76,7 @@
                   <hr>
                   <div class="form-group row mb-0">
                     <div class="col-md-9 offset-md-3">
-                      <a href="{% url 'update-contact' contact.id %}" class="btn btn-info">Edit</a>
+                      <a href="{% url 'edit-contact' contact.id %}" class="btn btn-info">Edit</a>
                       <a href="#" class="btn btn-outline-danger">Delete</a>
                       <a href="{% url 'home' %}" class="btn btn-outline-secondary">Cancel</a>
                     </div>
