@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import redirect, render,get_object_or_404
-from django.http import HttpResponse,JsonResponse
+from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from utils.helper import dump
 from . models import Contact
@@ -76,3 +76,8 @@ def show_contact(request,id):
 def update_contact(request,id):
     contact = get_object_or_404(Contact,pk=id)
     return render(request,'update_contact_form.html',{'contact':contact})
+
+def delete_contact(request,id):
+    contact = get_object_or_404(Contact,pk=id)
+    contact.delete()
+    return redirect('home')
