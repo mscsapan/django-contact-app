@@ -60,7 +60,7 @@
 
                   <tr>
                     <td>{{ forloop.counter }}</td>
-                    <td>{{ content.first_name }}</td>
+                    <td>{{ content.first_name|default:'Not found' }}</td>
                     <td>{{ content.last_name }}</td>
                     <td>{{ content.email }}</td>
                     <td>{{ content.phone }}</td>
