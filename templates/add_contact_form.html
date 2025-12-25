@@ -37,7 +37,7 @@
               <strong>Add New Contact</strong>
             </div>
             <form action="{% url 'save-contact' %}" method="post">
-              <!-- {% csrf_token %} -->
+              {% csrf_token %}
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-12">

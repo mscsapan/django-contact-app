@@ -1,4 +1,4 @@
-# utils/helpers.py
+from django.http import JsonResponse
 
 def get_all_model_data(model):
     """Get all objects with all fields"""
@@ -83,13 +83,10 @@ def get_all_items_with_fields(model, field_list=None):
 
 
 
-
-#  Get single item by ID
-def debug_item(model):
-    """Get single object by ID"""
-    fields = [field.name for field in model._meta.fields]
-    try:
-        result = model.objects.values(*fields).all()
-        return result
-    except model.DoesNotExist:
-        return None
+def dump(data):
+    """Debugging data as json format via web browser"""
+    if hasattr(data, '_meta'): # যদি এটি একটি মডেল অবজেক্ট হয়
+        from django.forms.models import model_to_dict
+        data = model_to_dict(data)
+    
+    return JsonResponse(data, json_dumps_params={'indent': 4})

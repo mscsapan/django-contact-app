@@ -1,8 +1,8 @@
 import json
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import redirect, render,get_object_or_404
 from django.http import HttpResponse,JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from utils.helper import debug_item
+from utils.helper import dump
 from . models import Contact
 
 
@@ -16,7 +16,19 @@ def add_contact(request):
     return render(request,'add_contact_form.html')
 
 
-@csrf_exempt
+
+# def save_contact(request):
+#     if request.method == 'POST':
+#         # এটি স্বয়ংক্রিয়ভাবে সব ইনপুট ডাটাকে ডিকশনারি বানিয়ে ফেলবে
+#         all_data = request.POST.dict() 
+        
+#         # পাসওয়ার্ড বা সেনসিটিভ কিছু থাকলে তা বাদ দিয়ে দিতে পারেন
+#         all_data.pop('csrfmiddlewaretoken', None) 
+        
+#         return JsonResponse(all_data)
+
+
+
 def save_contact(request):
    try:
        if request.method == 'POST':
@@ -27,9 +39,9 @@ def save_contact(request):
             address = request.POST['address']
             
             contact = Contact(first_name=first_name,last_name=last_name,email=email,phone=phone,address=address)
-            print(f'dataaaaaa {contact.objects.all()}')
-            data = json.loads(request.body)
-            return JsonResponse(data,safe=False)
+            # return dump(contact)
+            contact.save()
+            return redirect('home')
          
    except Exception as e:
         return JsonResponse({"error": str(e)}, status=405)
