@@ -70,3 +70,7 @@ def delete_contact(request,id):
     contact = get_object_or_404(Contact,pk=id)
     contact.delete()
     return redirect('home')
+
+
+def login(request):
+    return render(request,'auth/auth.html')
