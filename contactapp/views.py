@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render,get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -10,6 +11,7 @@ def home(request):
     contacts = Contact.objects.all()
     return render(request,'index.html',context={'contacts': contacts})
 
+@login_required(login_url='login-first')
 def add_contact(request):
     return render(request,'add_contact_form.html')
 
