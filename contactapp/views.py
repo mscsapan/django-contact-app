@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from django.shortcuts import redirect, render,get_object_or_404
 from django.http import JsonResponse
+from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
 from utils.helper import dump,get_all_model_data
 from . models import Contact
@@ -11,7 +13,7 @@ def home(request):
     contacts = Contact.objects.all()
     return render(request,'index.html',context={'contacts': contacts})
 
-@login_required(login_url='login-first')
+@login_required(login_url='login')
 def add_contact(request):
     return render(request,'add_contact_form.html')
 
@@ -74,5 +76,45 @@ def delete_contact(request,id):
     return redirect('home')
 
 
-def login(request):
-    return render(request,'auth/auth.html')
+def login_form(request):
+    return render(request,'auth/login-form.html')
+
+def signup_form(request):
+    return render(request,'auth/signu-form.html')
+
+
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(
+            request,
+            username=username,
+            password=password
+        )
+
+        if user:
+            login(request, user) 
+            return redirect('home')
+        else:
+            return render(request, 'auth/login.html', {'error': 'Invalid credentials'})
+
+    return render(request, 'auth/login.html')
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        User.objects.create_user(
+            username=username,
+            email=email,
+            password=password  # auto hashed
+        )
+
+        return redirect('login')
+
+    return render(request, 'auth/login.html')
