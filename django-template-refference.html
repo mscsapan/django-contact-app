@@ -1,0 +1,715 @@
+---
+
+## 2. HTML File (Print-Ready)
+
+Save as: `django_template_reference.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Template Reference Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+
+        h1 {
+            text-align: center;
+            color: #092e20;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #092e20;
+        }
+
+        h2 {
+            color: #092e20;
+            margin: 25px 0 15px 0;
+            padding: 10px;
+            background: #092e20;
+            color: white;
+            border-radius: 5px;
+        }
+
+        h3 {
+            color: #333;
+            margin: 20px 0 10px 0;
+            border-left: 4px solid #092e20;
+            padding-left: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background: #44b78b;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tr:hover {
+            background: #e8f5e9;
+        }
+
+        code {
+            background: #263238;
+            color: #80cbc4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        .section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .cheat-sheet {
+            background: #263238;
+            color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            font-family: monospace;
+            margin: 20px 0;
+        }
+
+        .cheat-sheet h3 {
+            color: #80cbc4;
+            border: none;
+            padding: 0;
+            margin-bottom: 10px;
+        }
+
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #092e20;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .print-btn:hover {
+            background: #44b78b;
+        }
+
+        @media print {
+            .print-btn {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .section {
+                box-shadow: none;
+                border: 1px solid #ddd;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+
+    <h1>🐍 Django Template Reference Guide</h1>
+
+    <div class="section">
+        <h2>1. For Loop Variables</h2>
+        <table>
+            <tr>
+                <th>Variable</th>
+                <th>Description</th>
+                <th>Example Output</th>
+            </tr>
+            <tr>
+                <td><code>forloop.counter</code></td>
+                <td>Current iteration (1-indexed)</td>
+                <td>1, 2, 3, ...</td>
+            </tr>
+            <tr>
+                <td><code>forloop.counter0</code></td>
+                <td>Current iteration (0-indexed)</td>
+                <td>0, 1, 2, ...</td>
+            </tr>
+            <tr>
+                <td><code>forloop.revcounter</code></td>
+                <td>Reverse iteration (1-indexed)</td>
+                <td>..., 3, 2, 1</td>
+            </tr>
+            <tr>
+                <td><code>forloop.revcounter0</code></td>
+                <td>Reverse iteration (0-indexed)</td>
+                <td>..., 2, 1, 0</td>
+            </tr>
+            <tr>
+                <td><code>forloop.first</code></td>
+                <td>True if first iteration</td>
+                <td>True / False</td>
+            </tr>
+            <tr>
+                <td><code>forloop.last</code></td>
+                <td>True if last iteration</td>
+                <td>True / False</td>
+            </tr>
+            <tr>
+                <td><code>forloop.parentloop</code></td>
+                <td>Parent loop reference</td>
+                <td>Nested loops</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>2. Template Tags</h2>
+        <table>
+            <tr>
+                <th>Tag</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>{% if %}</code></td>
+                <td>Conditional</td>
+                <td><code>{% if x %}...{% endif %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% for %}</code></td>
+                <td>Loop</td>
+                <td><code>{% for i in items %}...{% endfor %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% empty %}</code></td>
+                <td>Empty loop</td>
+                <td><code>{% for i in items %}...{% empty %}None{% endfor %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% url %}</code></td>
+                <td>URL reverse</td>
+                <td><code>{% url 'name' arg %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% static %}</code></td>
+                <td>Static files</td>
+                <td><code>{% static 'css/style.css' %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% block %}</code></td>
+                <td>Template block</td>
+                <td><code>{% block content %}...{% endblock %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% extends %}</code></td>
+                <td>Inheritance</td>
+                <td><code>{% extends 'base.html' %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% include %}</code></td>
+                <td>Include template</td>
+                <td><code>{% include 'partial.html' %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% csrf_token %}</code></td>
+                <td>CSRF token</td>
+                <td><code>&lt;form&gt;{% csrf_token %}&lt;/form&gt;</code></td>
+            </tr>
+            <tr>
+                <td><code>{% with %}</code></td>
+                <td>Variable assign</td>
+                <td><code>{% with total=items|length %}...{% endwith %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% load %}</code></td>
+                <td>Load tags</td>
+                <td><code>{% load static %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% now %}</code></td>
+                <td>Current time</td>
+                <td><code>{% now "Y-m-d" %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% cycle %}</code></td>
+                <td>Cycle values</td>
+                <td><code>{% cycle 'odd' 'even' %}</code></td>
+            </tr>
+            <tr>
+                <td><code>{% firstof %}</code></td>
+                <td>First truthy</td>
+                <td><code>{% firstof var1 var2 "default" %}</code></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>3. Template Filters</h2>
+
+        <h3>String Filters</h3>
+        <table>
+            <tr>
+                <th>Filter</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>lower</code></td>
+                <td>Lowercase</td>
+                <td><code>{{ name|lower }}</code></td>
+            </tr>
+            <tr>
+                <td><code>upper</code></td>
+                <td>Uppercase</td>
+                <td><code>{{ name|upper }}</code></td>
+            </tr>
+            <tr>
+                <td><code>title</code></td>
+                <td>Title Case</td>
+                <td><code>{{ name|title }}</code></td>
+            </tr>
+            <tr>
+                <td><code>capfirst</code></td>
+                <td>Capitalize first</td>
+                <td><code>{{ name|capfirst }}</code></td>
+            </tr>
+            <tr>
+                <td><code>truncatechars</code></td>
+                <td>Truncate characters</td>
+                <td><code>{{ text|truncatechars:50 }}</code></td>
+            </tr>
+            <tr>
+                <td><code>truncatewords</code></td>
+                <td>Truncate words</td>
+                <td><code>{{ text|truncatewords:10 }}</code></td>
+            </tr>
+            <tr>
+                <td><code>striptags</code></td>
+                <td>Remove HTML</td>
+                <td><code>{{ html|striptags }}</code></td>
+            </tr>
+            <tr>
+                <td><code>slugify</code></td>
+                <td>Slug format</td>
+                <td><code>{{ title|slugify }}</code></td>
+            </tr>
+            <tr>
+                <td><code>linebreaks</code></td>
+                <td>Newlines to &lt;p&gt;</td>
+                <td><code>{{ text|linebreaks }}</code></td>
+            </tr>
+            <tr>
+                <td><code>linebreaksbr</code></td>
+                <td>Newlines to &lt;br&gt;</td>
+                <td><code>{{ text|linebreaksbr }}</code></td>
+            </tr>
+            <tr>
+                <td><code>cut</code></td>
+                <td>Remove characters</td>
+                <td><code>{{ text|cut:" " }}</code></td>
+            </tr>
+        </table>
+
+        <h3>Number Filters</h3>
+        <table>
+            <tr>
+                <th>Filter</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>add</code></td>
+                <td>Add value</td>
+                <td><code>{{ num|add:5 }}</code></td>
+            </tr>
+            <tr>
+                <td><code>divisibleby</code></td>
+                <td>Check divisibility</td>
+                <td><code>{{ num|divisibleby:2 }}</code></td>
+            </tr>
+            <tr>
+                <td><code>floatformat</code></td>
+                <td>Format float</td>
+                <td><code>{{ price|floatformat:2 }}</code></td>
+            </tr>
+            <tr>
+                <td><code>filesizeformat</code></td>
+                <td>Human readable size</td>
+                <td><code>{{ size|filesizeformat }}</code></td>
+            </tr>
+        </table>
+
+        <h3>Date Filters</h3>
+        <table>
+            <tr>
+                <th>Filter</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>date</code></td>
+                <td>Format date</td>
+                <td><code>{{ date|date:"Y-m-d" }}</code></td>
+            </tr>
+            <tr>
+                <td><code>time</code></td>
+                <td>Format time</td>
+                <td><code>{{ time|time:"H:i" }}</code></td>
+            </tr>
+            <tr>
+                <td><code>timesince</code></td>
+                <td>Time since</td>
+                <td><code>{{ date|timesince }}</code></td>
+            </tr>
+            <tr>
+                <td><code>timeuntil</code></td>
+                <td>Time until</td>
+                <td><code>{{ date|timeuntil }}</code></td>
+            </tr>
+        </table>
+
+        <h3>List Filters</h3>
+        <table>
+            <tr>
+                <th>Filter</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>length</code></td>
+                <td>Get length</td>
+                <td><code>{{ list|length }}</code></td>
+            </tr>
+            <tr>
+                <td><code>first</code></td>
+                <td>First item</td>
+                <td><code>{{ list|first }}</code></td>
+            </tr>
+            <tr>
+                <td><code>last</code></td>
+                <td>Last item</td>
+                <td><code>{{ list|last }}</code></td>
+            </tr>
+            <tr>
+                <td><code>join</code></td>
+                <td>Join items</td>
+                <td><code>{{ list|join:", " }}</code></td>
+            </tr>
+            <tr>
+                <td><code>slice</code></td>
+                <td>Slice list</td>
+                <td><code>{{ list|slice:":3" }}</code></td>
+            </tr>
+            <tr>
+                <td><code>random</code></td>
+                <td>Random item</td>
+                <td><code>{{ list|random }}</code></td>
+            </tr>
+            <tr>
+                <td><code>dictsort</code></td>
+                <td>Sort by key</td>
+                <td><code>{{ list|dictsort:"name" }}</code></td>
+            </tr>
+        </table>
+
+        <h3>Default/Boolean Filters</h3>
+        <table>
+            <tr>
+                <th>Filter</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>default</code></td>
+                <td>Default value</td>
+                <td><code>{{ var|default:"N/A" }}</code></td>
+            </tr>
+            <tr>
+                <td><code>default_if_none</code></td>
+                <td>Default if None</td>
+                <td><code>{{ var|default_if_none:"N/A" }}</code></td>
+            </tr>
+            <tr>
+                <td><code>yesno</code></td>
+                <td>Boolean mapping</td>
+                <td><code>{{ flag|yesno:"Yes,No" }}</code></td>
+            </tr>
+        </table>
+
+        <h3>Safe/Escape Filters</h3>
+        <table>
+            <tr>
+                <th>Filter</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>safe</code></td>
+                <td>Mark safe HTML</td>
+                <td><code>{{ html|safe }}</code></td>
+            </tr>
+            <tr>
+                <td><code>escape</code></td>
+                <td>Escape HTML</td>
+                <td><code>{{ text|escape }}</code></td>
+            </tr>
+            <tr>
+                <td><code>escapejs</code></td>
+                <td>Escape for JS</td>
+                <td><code>{{ text|escapejs }}</code></td>
+            </tr>
+            <tr>
+                <td><code>urlencode</code></td>
+                <td>URL encode</td>
+                <td><code>{{ text|urlencode }}</code></td>
+            </tr>
+            <tr>
+                <td><code>urlize</code></td>
+                <td>URLs to links</td>
+                <td><code>{{ text|urlize }}</code></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>4. Date Format Characters</h2>
+        <table>
+            <tr>
+                <th>Char</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>d</code></td>
+                <td>Day (01-31)</td>
+                <td>01, 15, 31</td>
+            </tr>
+            <tr>
+                <td><code>j</code></td>
+                <td>Day (1-31)</td>
+                <td>1, 15, 31</td>
+            </tr>
+            <tr>
+                <td><code>D</code></td>
+                <td>Day short</td>
+                <td>Mon, Tue</td>
+            </tr>
+            <tr>
+                <td><code>l</code></td>
+                <td>Day full</td>
+                <td>Monday, Tuesday</td>
+            </tr>
+            <tr>
+                <td><code>m</code></td>
+                <td>Month (01-12)</td>
+                <td>01, 06, 12</td>
+            </tr>
+            <tr>
+                <td><code>n</code></td>
+                <td>Month (1-12)</td>
+                <td>1, 6, 12</td>
+            </tr>
+            <tr>
+                <td><code>M</code></td>
+                <td>Month short</td>
+                <td>Jan, Jun</td>
+            </tr>
+            <tr>
+                <td><code>F</code></td>
+                <td>Month full</td>
+                <td>January, June</td>
+            </tr>
+            <tr>
+                <td><code>y</code></td>
+                <td>Year (2 digit)</td>
+                <td>24</td>
+            </tr>
+            <tr>
+                <td><code>Y</code></td>
+                <td>Year (4 digit)</td>
+                <td>2024</td>
+            </tr>
+            <tr>
+                <td><code>H</code></td>
+                <td>Hour (00-23)</td>
+                <td>00, 13, 23</td>
+            </tr>
+            <tr>
+                <td><code>h</code></td>
+                <td>Hour (01-12)</td>
+                <td>01, 06, 12</td>
+            </tr>
+            <tr>
+                <td><code>i</code></td>
+                <td>Minutes</td>
+                <td>00, 30, 59</td>
+            </tr>
+            <tr>
+                <td><code>s</code></td>
+                <td>Seconds</td>
+                <td>00, 30, 59</td>
+            </tr>
+            <tr>
+                <td><code>A</code></td>
+                <td>AM/PM</td>
+                <td>AM, PM</td>
+            </tr>
+            <tr>
+                <td><code>a</code></td>
+                <td>am/pm</td>
+                <td>am, pm</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>5. Comparison Operators</h2>
+        <table>
+            <tr>
+                <th>Operator</th>
+                <th>Description</th>
+                <th>Example</th>
+            </tr>
+            <tr>
+                <td><code>==</code></td>
+                <td>Equal</td>
+                <td><code>{% if a == b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>!=</code></td>
+                <td>Not equal</td>
+                <td><code>{% if a != b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>&lt;</code></td>
+                <td>Less than</td>
+                <td><code>{% if a < b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>&gt;</code></td>
+                <td>Greater than</td>
+                <td><code>{% if a > b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>&lt;=</code></td>
+                <td>Less or equal</td>
+                <td><code>{% if a <= b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>&gt;=</code></td>
+                <td>Greater or equal</td>
+                <td><code>{% if a >= b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>in</code></td>
+                <td>In list/string</td>
+                <td><code>{% if a in list %}</code></td>
+            </tr>
+            <tr>
+                <td><code>not in</code></td>
+                <td>Not in list</td>
+                <td><code>{% if a not in list %}</code></td>
+            </tr>
+            <tr>
+                <td><code>is</code></td>
+                <td>Identity</td>
+                <td><code>{% if a is None %}</code></td>
+            </tr>
+            <tr>
+                <td><code>is not</code></td>
+                <td>Not identity</td>
+                <td><code>{% if a is not None %}</code></td>
+            </tr>
+            <tr>
+                <td><code>and</code></td>
+                <td>Logical AND</td>
+                <td><code>{% if a and b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>or</code></td>
+                <td>Logical OR</td>
+                <td><code>{% if a or b %}</code></td>
+            </tr>
+            <tr>
+                <td><code>not</code></td>
+                <td>Logical NOT</td>
+                <td><code>{% if not a %}</code></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="cheat-sheet">
+        <h3>Quick Reference</h3>
+        <pre>
+SYNTAX:
+  Tags:       {% tag %}...{% endtag %}
+  Variables:  {{ variable }}
+  Filters:    {{ variable|filter:arg }}
+  Comments:   {# single line comment #}
+              {% comment %}multi line{% endcomment %}
+
+COMMON PATTERNS:
+  {% if user.is_authenticated %}Welcome!{% endif %}
+  {% for item in items %}{{ item }}{% empty %}None{% endfor %}
+  {% url 'view-name' object.id %}
+  {% static 'css/style.css' %}
+  {{ name|title|truncatewords:5 }}
+  {{ date|date:"Y-m-d H:i" }}
+  {{ price|floatformat:2 }}
+  {{ items|length }}
+  {{ value|default:"N/A" }}
+        </pre>
+    </div>
+
+    <p style="text-align: center; margin-top: 30px; color: #666;">
+        📚 Official Docs: <a href="https://docs.djangoproject.com/en/stable/ref/templates/builtins/">Django Template
+            Builtins</a>
+    </p>
+</body>
+
+</html>
