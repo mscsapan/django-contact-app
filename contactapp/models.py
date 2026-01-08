@@ -11,7 +11,7 @@ class Contact(models.Model):
     
     
     def __str__(self):
-        return f'{self.id} - {self.email}'
+        return f'{self.id} - {self.first_name} - {self.email}'
     
     class Meta:
         ordering = ['id'] #Ascending
