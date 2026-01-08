@@ -12,6 +12,6 @@ urlpatterns = [
     
     path('login/',views.login_form, name='login'),
     path('signup/',views.signup_form , name='signup'),
-    # path('user-login/',views.login_view, name='user-login'),
-    # path('user-signup/',views.signup_view, name='user-signup'),
+    path('user-login/',views.login_view, name='user-login'),
+    path('user-signup/',views.signup_view, name='user-signup'),
 ]
