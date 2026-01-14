@@ -4,7 +4,7 @@ from django.shortcuts import redirect, render,get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.views.decorators.csrf import csrf_exempt
-from utils.helper import dump,get_all_model_data
+# from utils.helper import dump,get_all_model_data
 from . models import Contact
 
 
