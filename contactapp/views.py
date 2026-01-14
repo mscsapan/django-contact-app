@@ -80,7 +80,7 @@ def login_form(request):
     return render(request,'auth/login-form.html')
 
 def signup_form(request):
-    return render(request,'auth/signu-form.html')
+    return render(request,'auth/signup-form.html')
 
 
 def login_view(request):

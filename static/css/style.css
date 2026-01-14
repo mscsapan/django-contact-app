@@ -25,7 +25,7 @@ body{
 .container .registration{
   display: none;
 }
-#check:checked ~ .registration{
+/* #check:checked ~ .registration{
   display: block;
 }
 #check:checked ~ .login{
@@ -33,7 +33,7 @@ body{
 }
 #check{
   display: none;
-}
+} */
 .container .form{
   padding: 2rem;
 }
