@@ -18,8 +18,11 @@
       <header>Login</header>
       <form action="{% url 'user-login' %}" method="post">
         {% csrf_token %}
-        <input type="text" placeholder="Enter your email">
-        <input type="password" placeholder="Enter your password">
+        <input type="text" name="email" id="email" placeholder="Enter your email">
+        {% if errors.email is '' %}
+        <span>{{ errors.email }}</span>
+        {% endif %}
+        <input type="password" name="password" id="password" placeholder="Enter your password">
         <a href="#">Forgot password?</a>
         <a href="{% url 'user-login' %}"><input type="button" class="button" value="Login"></a>
       </form>

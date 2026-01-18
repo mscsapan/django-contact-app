@@ -84,19 +84,29 @@ def signup_form(request):
 
 
 def login_view(request):
+    
+    errors = {'email': 'Email is required','password': 'Password is required'}
+    
     if request.method == 'POST':
-        username = request.POST.get('username')
+        email = request.POST.get('email')
         password = request.POST.get('password')
-
-        user = authenticate(request,username=username,password=password)
-
-        if user:
-            login(request, user) 
-            return redirect('home')
+        
+        if not email.strip() or not password.stripe():
+            print(f'email {email} and password {password}')
         else:
-            return render(request, 'auth/login.html', {'error': 'Invalid credentials'})
+            return render(request, 'auth/login-form.html',context=errors)
+        
+        print(f'email {email} and password {password}')
 
-    return render(request, 'auth/login.html')
+        # user = authenticate(request,email=email,password=password)
+
+        # if user:
+        #     login(request, user) 
+        #     return redirect('home')
+        # else:
+        #     return render(request, 'auth/login-form.html', {'error': 'Invalid credentials'})
+
+    return render(request, 'auth/login-form.html')
 
 
 def signup_view(request):
