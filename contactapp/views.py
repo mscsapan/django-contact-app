@@ -94,7 +94,7 @@ def login_view(request):
         if not email.strip() or not password.stripe():
             print(f'email {email} and password {password}')
         else:
-            return render(request, 'auth/login-form.html',context=errors)
+            return render(request, 'auth/login-form.html',context={'errors':errors})
         
         print(f'email {email} and password {password}')
 
@@ -106,7 +106,7 @@ def login_view(request):
         # else:
         #     return render(request, 'auth/login-form.html', {'error': 'Invalid credentials'})
 
-    return render(request, 'auth/login-form.html')
+    return render(request, 'auth/login-form.html',context={'errors':errors})
 
 
 def signup_view(request):
