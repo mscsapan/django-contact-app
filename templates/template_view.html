@@ -13,10 +13,17 @@
     <h1>Hello {{ firstName }}</h1>
     {% endwith %}
 
+    {% if name == 'Ali'%}
+    <h1>{{ name }} is found</h1>
+
+    {% else %}
+    <h1>{{ name }} is not found</h1>
+    {% endif %}
+
     {{ name|default:'Hello' }}
 
     <!-- <<pre>{{ name|pprint }}</pre> -->
-    <pre>{{ number|default:'Hello'|pprint }}</pre>
+    <!-- <pre>{{ number|default:'Hello'|pprint }}</pre> -->
 
 
 </body>
