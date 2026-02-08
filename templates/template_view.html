@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Template View</title>
+</head>
+
+<body>
+    <!-- {% debug %} -->
+
+    {% with firstName='Mohammad Ali' %}
+    <h1>Hello {{ firstName }}</h1>
+    {% endwith %}
+
+    {{ name|default:'Hello' }}
+
+    <!-- <<pre>{{ name|pprint }}</pre> -->
+    <pre>{{ number|default:'Hello'|pprint }}</pre>
+
+
+</body>
+
+</html>

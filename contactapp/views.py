@@ -124,3 +124,11 @@ def signup_view(request):
         return redirect('login')
 
     return render(request, 'auth/login.html')
+
+
+def template_view(request):
+    numbers = dict({'number':[1,2,3,4,5,6,77777]})
+    dicts = {'name':'Ali'}
+    # return render(request,'template_view.html',locals())
+    # return render(request,'template_view.html',{**numbers,**dicts})
+    return render(request,'template_view.html',{**numbers,**dicts})
