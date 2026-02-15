@@ -9,7 +9,7 @@
 <body>
     <!-- {% debug %} -->
 
-    {% with firstName='Mohammad Ali' %}
+    <!-- {% with firstName='Mohammad Ali' %}
     <h1>Hello {{ firstName }}</h1>
     {% endwith %}
 
@@ -20,10 +20,15 @@
     <h1>{{ name }} is not found</h1>
     {% endif %}
 
-    {{ name|default:'Hello' }}
+    {{ name|default:'Hello' }} -->
 
     <!-- <<pre>{{ name|pprint }}</pre> -->
     <!-- <pre>{{ number|default:'Hello'|pprint }}</pre> -->
+
+
+    {% with name='Mohammad Ali Khan Jinnah' %}
+    <h1>{{ name|default:'Nothing'|lower }}</h1>
+    {% endwith %}
 
 
 </body>
