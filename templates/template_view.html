@@ -22,13 +22,24 @@
 
     {{ name|default:'Hello' }} -->
 
-    <!-- <<pre>{{ name|pprint }}</pre> -->
-    <!-- <pre>{{ number|default:'Hello'|pprint }}</pre> -->
 
+    {% with result=0 %}
+    <h1>Result is {{ result }}</h1>
 
-    {% with name='Mohammad Ali Khan Jinnah' %}
-    <h1>{{ name|default:'Nothing'|lower }}</h1>
+    {% for i in number %}
+    <h4>{{ i }}</h4>
+    {% endfor %}
+
     {% endwith %}
+
+    <!-- <pre>{{ name|pprint }}</pre>
+    <pre>{{ number|default:'Hello'|pprint }}</pre> -->
+
+
+
+    <!-- {% with name='Mohammad Ali Khan Jinnah' %}
+    <h1>{{ name|default:'Nothing'|lower }}</h1>
+    {% endwith %} -->
 
 
 </body>
